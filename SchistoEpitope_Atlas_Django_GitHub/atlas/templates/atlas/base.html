@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive exploration of antibody-recognized epitopes across Schistosoma species and host models.">
+  <title>{% block title %}SchistoEpitope Atlas{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'atlas/css/atlas.css' %}">
+  <link rel="stylesheet" href="{% static 'atlas/css/app.css' %}">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+<div class="atlas-page">
+  <header class="atlas-header">
+    <div class="atlas-header__inner">
+      <a class="atlas-brand atlas-brand-link" href="{% url 'atlas:home' %}" aria-label="SchistoEpitope Atlas home">
+        <div class="atlas-brand__mark" aria-hidden="true">
+          <span class="antibody antibody--left"></span><span class="antibody antibody--right"></span>
+          <span class="epitope epitope--1"></span><span class="epitope epitope--2"></span>
+          <span class="epitope epitope--3"></span><span class="epitope epitope--4"></span><span class="epitope epitope--5"></span>
+        </div>
+        <div class="atlas-brand__text">
+          <div class="atlas-brand__name"><span>SchistoEpitope</span> <strong>Atlas</strong></div>
+          <p>Interactive exploration of antibody-recognized epitopes<br>across <em>Schistosoma</em> species and hosts</p>
+        </div>
+      </a>
+      <div class="atlas-header__art" aria-hidden="true"><div class="molecule molecule--purple"></div><div class="molecule molecule--blue"></div><div class="molecule molecule--orange"></div><div class="molecule molecule--light"></div></div>
+    </div>
+  </header>
+  {% block content %}{% endblock %}
+  <footer class="app-footer">SchistoEpitope Atlas · Interactive research resource</footer>
+</div>
+<div id="heatmap-tooltip" class="heatmap-tooltip" role="status" aria-live="polite" hidden></div>
+<script src="{% static 'atlas/js/atlas.js' %}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

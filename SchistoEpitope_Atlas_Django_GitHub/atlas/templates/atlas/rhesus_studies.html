@@ -1,0 +1,14 @@
+{% extends 'atlas/base.html' %}
+{% block title %}Rhesus Macaque | SchistoEpitope Atlas{% endblock %}
+{% block content %}
+<main class="atlas-section explorer-page">
+  <p class="eyebrow"><a href="{% url 'atlas:home' %}">Atlas home</a> / Rhesus Macaque</p>
+  <h1>Rhesus Macaque</h1>
+  <p class="page-lead">Select a study to inspect its samples. The two study datasets are rendered separately to avoid mixing experimental sources.</p>
+  <div class="study-choice-grid">
+    {% for study in studies %}
+    <a class="study-choice" href="{{ study.url }}"><span class="study-choice__eyebrow">Study source</span><h2>{{ study.label }}</h2><p>{{ study.description }}</p><span class="study-choice__action">Open heatmaps →</span></a>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

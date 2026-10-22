@@ -1,0 +1,40 @@
+{% extends 'atlas/base.html' %}
+{% block title %}SchistoEpitope Atlas | Home{% endblock %}
+{% block content %}
+<main>
+  <section class="atlas-section atlas-section--welcome">
+    <div class="section-heading">
+      <div class="section-icon">⌁</div>
+      <div>
+        <h1>Welcome to the SchistoEpitope Atlas</h1>
+        <p>The Atlas organizes experimental peptide-reactivity data from published studies and makes the data explorable through interactive heatmaps.</p>
+        <p>Explore host-specific measurements, inspect peptide identifiers, and trace each dataset to its study of origin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="atlas-section">
+    <div class="section-heading section-heading--compact"><div class="section-icon section-icon--host">⌘</div><h2>Explore by host</h2></div>
+    <div class="host-grid host-grid--atlas">
+      {% for card in host_cards %}
+      <a class="host-card host-card--link" href="{{ card.url }}">
+        <span class="host-icon" aria-hidden="true">{% if card.key == 'human' %}◉{% elif card.key == 'mouse' %}●{% elif card.key == 'rhesus' %}◕{% elif card.key == 'baboon' %}◒{% else %}◓{% endif %}</span>
+        <span class="host-card__text"><strong>{{ card.label }}</strong><small>{{ card.source }}</small></span>
+        <span class="host-card__arrow" aria-hidden="true">→</span>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="info-banner"><span class="info-banner__icon">i</span><span>Rhesus data are separated by study: Hi/Low samples are assigned to Vance et al. (2024), while Fast/Slow samples are assigned to Woellner-Santos et al. (2024).</span></div>
+  </section>
+
+  <section class="atlas-section studies-section">
+    <div class="studies-title"><span class="studies-title__icon">▣</span><h2>Dataset provenance</h2></div>
+    <div class="studies-grid studies-grid--restored">
+      <article class="study"><span class="study__number">1</span><p><strong>Human</strong><br>Khouri et al. — source article supplied for the Human dataset.</p></article>
+      <article class="study"><span class="study__number">2</span><p><strong>Mouse</strong><br>Farias et al. (2021). <em>Epitope Mapping of Exposed Tegument and Alimentary Tract Proteins Identifies Putative Antigenic Targets of the Attenuated Schistosome Vaccine.</em><br>doi: 10.3389/fimmu.2020.624613.</p></article>
+      <article class="study"><span class="study__number">3</span><p><strong>Rhesus Macaque</strong><br>Vance et al. (2024): Hi/Low samples; Woellner-Santos et al. (2024): Fast/Slow samples.</p></article>
+      <article class="study"><span class="study__number">4</span><p><strong>Baboon and Chimpanzee</strong><br>Peptide identifiers are inherited from the corresponding Mouse tissue/row; measurements remain host-specific. Dataset provenance is the SchistoEpitope Atlas compilation.</p></article>
+    </div>
+  </section>
+</main>
+{% endblock %}
